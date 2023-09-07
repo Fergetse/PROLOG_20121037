@@ -1,8 +1,5 @@
-"# PROLOG_20121037" 
-"ejemplo prolog"
+;Áreas y volúmenes Tarea por Fernando Getsemaní Santoyo Corona
 
-# Tarea de áread y volúmenes:
-```
 
 (defun a-cuadrado ()
   (princ "Dame el tamaño de un lado: ")
@@ -154,4 +151,4 @@
   (princ "El volumen del cono truncado es: ")
   (princ (/ (* pi (+ (expt R 2) (expt r 2))))))
 
-```
+
