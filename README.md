@@ -421,7 +421,7 @@
 
 ```
 
-# Sitema de árbol genialógico
+# Sitema de árbol genealógico
 
 ```java
 
