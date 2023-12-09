@@ -486,6 +486,123 @@ responder(Pregunta, Respuesta) :-
 
 
 ```
+
+# Eliza traducida al español
+
+```java
+
+eliza :-
+    writeln('Hola, mi nombre es Eliza, tu chatbot. Por favor, ingresa tu consulta, usando solo minúsculas sin punto al final:'),
+    readln(Input),
+    eliza(Input),
+    !.
+
+eliza(Input) :- 
+    Input == ['Adios'],
+    writeln('Adiós. Espero haber podido ayudarte.'),
+    !.
+
+eliza(Input) :- 
+    Input == ['Adios', '.'],
+    writeln('Adiós. Espero haber podido ayudarte.'),
+    !.
+
+eliza(Input) :-
+    template(Stim, Resp, IndStim),
+    match(Stim, Input),
+    replace0(IndStim, Input, 0, Resp, R),
+    writeln(R),
+    readln(Input1),
+    eliza(Input1),
+    !.
+
+template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, '¿Cómo', estás, tú, '?'], [4]).
+template([buenos_días, mi, nombre, es, s(_), '.'], ['Buenos días', '¿Cómo', estás, tú, 0, '?'], [4]).
+template([hola, ',', mi, nombre, es, s(_), '.'], ['Hola', 0, '¿Cómo', estás, tú, '?'], [5]).
+template([buenos_días, ',', mi, nombre, es, s(_), '.'], ['Buenos días', '¿Cómo', estás, tú, 0, '?'], [5]).
+template([hola, _], ['Hola', '¿Cómo', estás, tú, '?'], []).
+template([buenos_días, _], ['Buenos días', '¿Cómo', estás, tú, '?'], []).
+template([yo, s(_), yo, soy, s(_),'.'], ['¿Por qué', eres, tú, 1, '?'], [4]).
+template([yo, s(_), tú, '.'], ['¿Por qué', me, tú, '?'], [1]).
+template([yo, soy, s(_),'.'], ['¿Por qué', eres, tú, 0, '?'], [2]).
+template([te, gustan, las, s(_), _], [flagLike], [3]).
+template([te, gustan, los, s(_), _], [flagLike], [3]).
+template([tu, eres, s(_), _], [flagDo], [2]).
+template([que, eres, tu, s(_)], [flagIs], [2]).
+template([eres, s(_), '?'], [flagIs], [2]).
+template([como, estas, tu, '?'], ['Yo estoy bien, gracias por preguntar.'], []).
+template([yo, pienso, que, _], ['Bueno, esa es tu opinión.'], []).
+template([porque, _], ['Esa no es una buena razón.'], []).
+template([tengo, un, s(_), con, s(_), '.'], ['Tienes que lidiar con tu 0 y tu 1 de manera madura.'], [2, 4]).
+template([yo, s(_),  _], ['Puedo recomendarte un libro sobre ello.'], []).
+template([porfavor, s(_), _], ['No puedo ayudar, soy solo una máquina.'], []).
+template([dime, _ , s(_), _], ['No, no puedo, soy mala en eso.'], []).
+template(_, ['Por favor, explica un poco más.'], []).
+
+elizaGusta(X, R) :- leGusta(X), R = ['Sí, me gusta', X].
+elizaGusta(X, R) :- \+leGusta(X), R = ['No, no me gusta', X].
+leGusta(manzanas).
+leGusta(computadoras).
+leGusta(carros).
+
+elizaHace(X, R) :- hace(X), R = ['Sí, yo', X, 'y me encanta'].
+elizaHace(X, R) :- \+hace(X), R = ['No, yo no', X, '. Es demasiado difícil para mí.'].
+hace(estudiar).
+hace(cocinar).
+hace(trabajar).
+
+elizaEs(X, R) :- es0(X), R = ['Sí, yo soy', X].
+elizaEs(X, R) :- \+es0(X), R = ['No, yo no soy', X].
+es0(tonta).
+es0(rara).
+es0(amable).
+es0(feliz).
+
+match([],[]).
+match([], _):- true.
+match([S|Stim],[I|Input]) :-
+    atom(S),
+    S == I,
+    match(Stim, Input),
+    !.
+match([S|Stim],[_|Input]) :-
+    \+atom(S),
+    match(Stim, Input),
+    !.
+
+replace0([], _, _, Resp, R):- append(Resp, [], R),!.
+replace0([I|_], Input, _, Resp, R):-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagLike,
+    elizaGusta(Atom, R).
+replace0([I|_], Input, _, Resp, R):-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagDo,
+    elizaHace(Atom, R).
+replace0([I|_], Input, _, Resp, R):-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagIs,
+    elizaEs(Atom, R).
+replace0([I|Index], Input, N, Resp, R):-
+    length(Index, M), M =:= 0,
+    nth0(I, Input, Atom),
+    select(N, Resp, Atom, R1),
+    append(R1, [], R),
+    !.
+replace0([I|Index], Input, N, Resp, R):-
+    nth0(I, Input, Atom),
+    length(Index, M), M > 0,
+    select(N, Resp, Atom, R1),
+    N1 is N + 1,
+    replace0(Index, Input, N1, R1, R),
+    !.
+
+
+```
+
 # Base de enfermedad para sistema maestro
 
 ```java
