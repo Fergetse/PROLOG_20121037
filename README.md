@@ -486,3 +486,42 @@ responder(Pregunta, Respuesta) :-
 
 
 ```
+# Base de enfermedad para sistema maestro
+
+```java
+
+% Hechos sobre los síntomas del Síndrome de Moebius
+sintoma(sindrome_moebius, parálisis_facial).
+sintoma(sindrome_moebius, incapacidad_sonreir).
+sintoma(sindrome_moebius, imposibilidad_movimientos_oculares).
+sintoma(sindrome_moebius, dificultad_alimentarse).
+sintoma(sindrome_moebius, estrabismo).
+sintoma(sindrome_moebius, dificultad_habla).
+sintoma(sindrome_moebius, hipotonía_muscular).
+sintoma(sindrome_moebius, anomalías_piernas_pies).
+
+% Hechos sobre las causas y factores de riesgo del Síndrome de Moebius
+causa(sindrome_moebius, factores_geneticos).
+causa(sindrome_moebius, anomalías_desarrollo_embrionario).
+causa(sindrome_moebius, exposición_sustancias_toxicas).
+
+% Tratamientos y terapias para el Síndrome de Moebius
+tratamiento(sindrome_moebius, terapia_ocupacional).
+tratamiento(sindrome_moebius, terapia_habla).
+tratamiento(sindrome_moebius, cirugia_reconstructiva).
+tratamiento(sindrome_moebius, fisioterapia).
+tratamiento(sindrome_moebius, intervenciones_apoyo).
+
+% Reglas para preguntas y respuestas sobre el Síndrome de Moebius
+template([qué, es, el, síndrome, de, moebius, '?'], ['El Síndrome de Moebius es una enfermedad rara que afecta los nervios craneales, causando parálisis facial y limitaciones en los movimientos oculares y faciales.'], [1]).
+
+template([cuáles, son, los, síntomas, del, síndrome, de, moebius, '?'], ['Los síntomas del Síndrome de Moebius incluyen parálisis facial, dificultades en los movimientos oculares, problemas de alimentación y habla, entre otros.'], [2]).
+
+template([cuáles, son, las, causas, del, síndrome, de, moebius, '?'], ['Las causas pueden estar relacionadas con factores genéticos y anomalías durante el desarrollo embrionario, así como exposición a sustancias tóxicas en el embarazo.'], [3]).
+
+template([cómo, se, trata, el, síndrome, de, moebius, '?'], ['El tratamiento incluye terapias de rehabilitación como terapia ocupacional, terapia del habla, cirugía reconstructiva y fisioterapia para mejorar la calidad de vida del paciente.'], [4]).
+
+template([cuál, es, el, pronóstico, del, síndrome, de, moebius, '?'], ['El pronóstico varía según la severidad de los síntomas, pero con intervenciones tempranas y tratamiento adecuado, se puede mejorar la calidad de vida de quienes lo padecen.'], [5]).
+
+
+```
