@@ -603,6 +603,84 @@ replace0([I|Index], Input, N, Resp, R):-
 
 ```
 
+#Sistema para preguntar características de lenguaje de programación a eliza
+
+```java
+
+% Hechos sobre lenguajes de programación
+lenguaje_programacion(c, estructurado).
+lenguaje_programacion(cpp, orientado_objetos).
+lenguaje_programacion(java, orientado_objetos).
+lenguaje_programacion(python, interpretado).
+lenguaje_programacion(python, de_alto_nivel).
+lenguaje_programacion(python, scripting).
+lenguaje_programacion(python, multiparadigma).
+lenguaje_programacion(javascript, interpretado).
+lenguaje_programacion(javascript, basado_prototipos).
+lenguaje_programacion(javascript, web).
+lenguaje_programacion(swift, orientado_objetos).
+lenguaje_programacion(swift, funcional).
+lenguaje_programacion(swift, compilado).
+lenguaje_programacion(ruby, interpretado).
+lenguaje_programacion(ruby, de_alto_nivel).
+lenguaje_programacion(ruby, scripting).
+lenguaje_programacion(go, compilado).
+lenguaje_programacion(go, concurrente).
+lenguaje_programacion(go, de_alto_nivel).
+lenguaje_programacion(scala, funcional).
+lenguaje_programacion(scala, orientado_objetos).
+lenguaje_programacion(scala, compilado).
+lenguaje_programacion(kotlin, orientado_objetos).
+lenguaje_programacion(kotlin, interoperable_java).
+lenguaje_programacion(kotlin, compilado).
+lenguaje_programacion(pascal, estructurado).
+lenguaje_programacion(pascal, compilado).
+lenguaje_programacion(lisp, funcional).
+lenguaje_programacion(lisp, interpretado).
+lenguaje_programacion(haskell, funcional).
+lenguaje_programacion(haskell, compilado).
+lenguaje_programacion(clojure, funcional).
+lenguaje_programacion(clojure, lisp).
+lenguaje_programacion(clojure, compilado).
+lenguaje_programacion(perl, interpretado).
+lenguaje_programacion(perl, scripting).
+lenguaje_programacion(perl, multiparadigma).
+lenguaje_programacion(php, interpretado).
+lenguaje_programacion(php, web).
+
+% Preguntas y reglas sobre lenguajes de programación
+template([es, un, lenguaje, de, programacion, orientado_objetos], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, interpretado], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, compilado], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, funcional], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, scripting], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, web], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, multiparadigma], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, basado_prototipos], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, concurrente], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, de_alto_nivel], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, interoperable_java], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, estructurado], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, lisp], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, clojure], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, perl], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, haskell], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, swift], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, kotlin], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, pascal], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, go], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, ruby], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, javascript], [flagFeature], [2]).
+template([es, un, lenguaje, de, programacion, php], [flagFeature], [2]).
+
+% Respuestas sobre lenguajes de programación
+elizaFeature(X, R) :- lenguaje_programacion(X, Y), R = ['Sí,', X, 'es', Y].
+elizaFeature(X, R) :- \+lenguaje_programacion(X, _), R = ['No,', X, 'no tiene esa característica.']
+
+
+```
+
+
 # Base de enfermedad para sistema maestro
 
 ```java
