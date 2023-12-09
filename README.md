@@ -1,7 +1,8 @@
-"# PROLOG_20121037" 
+"# PROLOG_20121037"
 "ejemplo prolog"
 
 # Tarea de áreas y volúmenes:
+
 ```lisp
 ;Áreas y volúmenes Tarea por Fernando Getsemaní Santoyo Corona
 
@@ -216,7 +217,8 @@
   (princ "Dame el radio: ")
   (setq radio (read))
   (princ "El área del círculo es: ")
-  (princ (* pi (* radio radio))))
+  (princ (* pi (* radio radio)))
+)
 
 ;trapecio
 (defun a-trapecio ()
@@ -362,13 +364,12 @@
 
 # Tarea áreas y volúmenes usando Lambdas
 
-
 ```lisp
 
 ;ÁREAS:
 
 (defvar cuadrado (lambda (a)
-	(* a a)	
+	(* a a)
 ))
 
 (defvar rectangulo (lambda (b a)(
@@ -420,3 +421,68 @@
 
 ```
 
+# Sitema de árbol genialógico
+
+```java
+
+;sistema basado en la familia Simpson prolog
+
+% Padres
+padres(abraham, herbert).
+padres(mona, herbert).
+padres(herbert, homer).
+padres(homer, bart).
+padres(homer, lisa).
+padres(homer, maggie).
+padres(marge, bart).
+padres(marge, lisa).
+padres(marge, maggie).
+
+% Reglas de descendencia
+hijo(X, Y) :- padres(Y, X).
+hija(X, Y) :- padres(Y, X).
+madre(X, Y) :- padres(X, Y), hija(Y, _).
+padre(X, Y) :- padres(X, Y), hijo(Y, _).
+abuelo(X, Y) :- padres(X, Z), padres(Z, Y), (hijo(Y, _); hija(Y, _)).
+abuela(X, Y) :- padres(X, Z), padres(Z, Y), (hijo(Y, _); hija(Y, _)).
+hermano(X, Y) :- padres(Z, X), padres(Z, Y), hijo(X, _), hijo(Y, _), X \= Y.
+hermana(X, Y) :- padres(Z, X), padres(Z, Y), hija(X, _), hija(Y, _), X \= Y.
+
+pregunta(Respuesta) :-
+    write('¿Quiere hacer una pregunta sobre los Simpson? (sí/no): '),
+    read(Decision),
+    (
+        Decision = 'sí' ->
+        hacer_pregunta(Respuesta)
+        ;
+        Respuesta = '¡Hasta luego!'
+    ).
+
+hacer_pregunta(Respuesta) :-
+    write('¿Cuál es tu pregunta? '), nl,
+    read(Pregunta),
+    (
+        responder(Pregunta, Respuesta),
+        nl,
+        write('La respuesta es: '),
+        write(Respuesta), nl,
+        pregunta(NuevaRespuesta)
+        ;
+        Respuesta = 'No entiendo la pregunta, por favor intenta otra vez.',
+        nl,
+        write(Respuesta), nl,
+        hacer_pregunta(NuevaRespuesta)
+    ).
+
+responder(Pregunta, Respuesta) :-
+    (
+        call(Pregunta) ->
+        Respuesta = 'sí'
+        ;
+        Respuesta = 'no'
+    ).
+
+:- pregunta(Respuesta).
+
+
+```
