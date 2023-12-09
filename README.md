@@ -603,7 +603,7 @@ replace0([I|Index], Input, N, Resp, R):-
 
 ```
 
-#Sistema para preguntar características de lenguaje de programación a eliza
+# Sistema para preguntar características de lenguaje de programación a eliza
 
 ```java
 
