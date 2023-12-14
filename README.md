@@ -720,3 +720,491 @@ template([cuál, es, el, pronóstico, del, síndrome, de, moebius, '?'], ['El pr
 
 
 ```
+
+
+
+# Eliza + Síndrome + Recetas
+
+```java
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sección de Eliza
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+eliza :-
+    writeln('Hola, mi nombre es Eliza, tu chatbot. Por favor, ingresa tu consulta, usando solo minusculas sin punto al final:'),
+    readln(Input),
+    eliza(Input),
+    !.
+
+eliza(Input) :- 
+    Input == ['Adios'],
+    writeln('Adios. Espero haber podido ayudarte.'),
+    !.
+
+eliza(Input) :- 
+    Input == ['Adios', '.'],
+    writeln('Adios. Espero haber podido ayudarte.'),
+    !.
+
+eliza(Input) :-
+    template(Stim, Resp, IndStim),
+    match(Stim, Input),
+    replace0(IndStim, Input, 0, Resp, R),
+    writeln(R),
+    readln(Input1),
+    eliza(Input1),
+    !.
+
+template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, '¿Como', estas, tu, '?'], [4]).
+template([buenos_dias, mi, nombre, es, s(_), '.'], ['Buenos dias', '¿Como', estas, tu, 0, '?'], [4]).
+template([hola, ',', mi, nombre, es, s(_), '.'], ['Hola', 0, '¿Como', estas, tu, '?'], [5]).
+template([buenos_dias, ',', mi, nombre, es, s(_), '.'], ['Buenos dias', '¿Como', estas, tu, 0, '?'], [5]).
+template([hola, _], ['Hola', '¿Como', estas, tu, '?'], []).
+template([buenos_dias, _], ['Buenos dias', '¿Como', estas, tu, '?'], []).
+template([yo, s(_), yo, soy, s(_),'.'], ['¿Por que', eres, tu, 1, '?'], [4]).
+template([yo, s(_), tu, '.'], ['¿Por que', me, tu, '?'], [1]).
+template([yo, soy, s(_),'.'], ['¿Por que', eres, tu, 0, '?'], [2]).
+template([te, gustan, las, s(_), _], [flagLike], [3]).
+template([te, gustan, los, s(_), _], [flagLike], [3]).
+template([tu, eres, s(_), _], [flagDo], [2]).
+template([que, eres, tu, s(_)], [flagIs], [2]).
+template([eres, s(_), '?'], [flagIs], [2]).
+template([como, estas, tu, '?'], ['Yo estoy bien, gracias por preguntar.'], []).
+template([yo, pienso, que, _], ['Bueno, esa es tu opinion.'], []).
+template([porque, _], ['Esa no es una buena razon.'], []).
+template([tengo, un, s(_), con, s(_), '.'], ['Tienes que lidiar con tu 0 y tu 1 de manera madura.'], [2, 4]).
+template([yo, s(_),  _], ['Puedo recomendarte un libro sobre ello.'], []).
+template([porfavor, s(_), _], ['No puedo ayudar, soy solo una maquina.'], []).
+template([dime, _ , s(_), _], ['No, no puedo, soy mala en eso.'], []).
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sección del Sindrome de Moebius
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Hechos sobre los sintomas del Sindrome de Moebius
+sintoma(sindrome_moebius, paralisis_facial).
+sintoma(sindrome_moebius, incapacidad_sonreir).
+sintoma(sindrome_moebius, imposibilidad_movimientos_oculares).
+sintoma(sindrome_moebius, dificultad_alimentarse).
+sintoma(sindrome_moebius, estrabismo).
+sintoma(sindrome_moebius, dificultad_habla).
+sintoma(sindrome_moebius, hipotonia_muscular).
+sintoma(sindrome_moebius, anomalias_piernas_pies).
+sintoma(sindrome_moebius, micrognatia).
+sintoma(sindrome_moebius, retraso_desarrollo_motor).
+sintoma(sindrome_moebius, dificultad_respiratoria).
+sintoma(sindrome_moebius, babeo_excesivo).
+sintoma(sindrome_moebius, problemas_sensibilidad_facial).
+sintoma(sindrome_moebius, problemas_visuales).
+sintoma(sindrome_moebius, dificultad_succionar).
+sintoma(sindrome_moebius, irritabilidad).
+sintoma(sindrome_moebius, dificultades_sociales_relacionales).
+sintoma(sindrome_moebius, dificultad_tragar_saliva).
+sintoma(sindrome_moebius, desarrollo_dental_anormal).
+sintoma(sindrome_moebius, dificultad_mover_ojos_en_conjunto).
+
+
+% Hechos sobre las causas y factores de riesgo del Sindrome de Moebius
+causa(sindrome_moebius, factores_geneticos).
+causa(sindrome_moebius, anomalias_desarrollo_embrionario).
+causa(sindrome_moebius, exposicion_sustancias_toxicas).
+causa(sindrome_moebius, ingesta_medicamentos_embarazo).
+causa(sindrome_moebius, lesiones_danio_utero).
+causa(sindrome_moebius, anomalias_formacion_tronco_encefalico).
+causa(sindrome_moebius, influencia_virus_infecciones).
+causa(sindrome_moebius, factores_ambientales_quimicos).
+causa(sindrome_moebius, desordenes_vasculares_embarazo).
+causa(sindrome_moebius, predisposiciones_geneticas_ambientales).
+causa(sindrome_moebius, falta_suministro_sanguineo_feto).
+causa(sindrome_moebius, cambios_expresion_genica).
+causa(sindrome_moebius, influencias_hormonales_embarazo).
+causa(sindrome_moebius, alteraciones_formacion_vasos_sanguineos).
+causa(sindrome_moebius, factores_epigeneticos).
+causa(sindrome_moebius, anomalias_cromosomicas).
+causa(sindrome_moebius, consumo_alcohol_embarazo).
+causa(sindrome_moebius, exposicion_agentes_teratogenicos).
+causa(sindrome_moebius, influencia_nutricion_materna).
+causa(sindrome_moebius, interaccion_factores_geneticos_ambientales).
+
+
+% Tratamientos y terapias para el Sindrome de Moebius
+tratamiento(sindrome_moebius, terapia_ocupacional).
+tratamiento(sindrome_moebius, terapia_habla).
+tratamiento(sindrome_moebius, cirugia_reconstructiva).
+tratamiento(sindrome_moebius, fisioterapia).
+tratamiento(sindrome_moebius, intervenciones_apoyo).
+tratamiento(sindrome_moebius, terapia_visual).
+tratamiento(sindrome_moebius, ortodoncia).
+tratamiento(sindrome_moebius, cuidado_nutricional).
+tratamiento(sindrome_moebius, apoyo_psicologico).
+tratamiento(sindrome_moebius, educacion_especializada).
+tratamiento(sindrome_moebius, terapia_respiratoria).
+tratamiento(sindrome_moebius, manejo_dolor).
+tratamiento(sindrome_moebius, estimulacion_temprana).
+tratamiento(sindrome_moebius, adaptaciones_ergonomicas).
+tratamiento(sindrome_moebius, tecnologias_asistencia).
+tratamiento(sindrome_moebius, soporte_social_familiar).
+tratamiento(sindrome_moebius, seguimiento_medico).
+tratamiento(sindrome_moebius, cuidado_dental_especializado).
+tratamiento(sindrome_moebius, readaptacion_social).
+tratamiento(sindrome_moebius, programas_inclusivos).
+
+
+% Reglas para preguntas y respuestas sobre el Sindrome de Moebius
+
+template([que, es, el, sindrome, de, moebius, '?'], ['El Sindrome de Moebius es una enfermedad rara que afecta los nervios craneales, causando paralisis facial y limitaciones en los movimientos oculares y faciales.'], []).
+
+template([cuales, son, los, sintomas, del, sindrome, de, moebius, '?'], ['Los sintomas del Sindrome de Moebius incluyen: ', SINTOMAS], []) :- findall(X, sintoma(sindrome_moebius, X), SINTOMAS).
+
+template([cuales, son, las, causas, del, sindrome, de, moebius, '?'], ['Algunas de las causas son: ', CAUSAS], []) :- findall(X, causa(sindrome_moebius, X), CAUSAS) .
+
+template([como, se, trata, el, sindrome, de, moebius, '?'], ['El tratamiento puede incluir diversas alternativas como: ', TRATA], []) :- findall(X, tratamiento(sindrome_moebius, X), TRATA).
+
+
+
+template([cual, es, el, pronostico, del, sindrome, de, moebius, '?'], ['El pronostico varia segun la severidad de los sintomas, pero con intervenciones tempranas y tratamiento adecuado, se puede mejorar la calidad de vida de quienes lo padecen.'], []).
+
+
+
+
+
+template([si, tengo, s(_), podria, ser, sindrome, de, moebius, '?'], [flag_moebius],[2]).
+
+es_moebius(X, R):- sintoma(_,X), R = [ X, es, un, sintoma, del, sindrome, de, moebius,., es, probable, que, lo, tenga, consulte, a, su, medico].
+es_moebius(X, R):- \+sintoma(_,X), R = [X, no, es, un, sintoma, del, sindrome, de, moebius].
+
+%trigger para síntoma
+replace0([I|_], Input, _, Resp, R):-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flag_moebius,
+    es_moebius(Atom, R).
+
+
+
+
+
+template([si, tengo, sindrome, de, moebius, y, aplico, T, podre, mejorar, '?'], [flag_trat], [7]).
+
+look_trate(X, R):- tratamiento(_,X), R = [ X, es, un, tratamiento, del, sindrome, de, moebius, por, ello, podras, mejorar, si, le, das, seguimiento].
+look_trate(X, R):- \+tratamiento(_,X), R = [X, no, es, un, tratamiento, del, sindrome, de, moebius, no, mejoraras].
+
+replace0([I|_], Input, _, Resp, R):-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flag_trat,
+    look_trate(Atom, R).
+
+
+
+
+template([tengo, s(_), ',', (_), y, (_), podria, ser, sindrome, de, moebius, '?'], [flagVariosintomas], [1, 3, 5]).
+
+multisintomas(X, Y, Z, R):- multi_sintoma(X, Y, Z), R = [ X, Y, y, Z, son, sintomas, del, sindrome, de, moebius, ., "Por favor consulte a su medico cuanto antes."].
+
+multisintomas(X, Y, Z, R):- \+multi_sintoma(X, Y, Z), R = [ X, Y, y, Z, algunos, son, sintomas, del, sindrome, de, moebius, ., "Le recomiendo consultar a un medico."].
+
+multisintomas(X, Y, Z, R):- \+multi_sintoma(X, Y, Z), R = [ X, Y, y, Z, no, son, sintomas, del, sindrome, de, moebius,.].
+
+
+multi_sintoma(X, Y, Z) :- sintoma(sindrome_moebius, X), sintoma(sindrome_moebius, Y), sintoma(sindrome_moebius, Z).
+
+
+% trigger para 3 síntomas del síndrome
+replace0([I,J,K|_], Input, _, Resp, R):-
+	nth0(I, Input, Atom),
+	nth0(0, Resp, X),
+	X == flagVariosintomas,
+	nth0(J, Input, Atom2),
+	nth0(0, Resp, Y),
+	Y == flagVariosintomas,
+	nth0(K, Input, Atom3),
+	nth0(0, Resp, Z),
+	Z == flagVariosintomas,
+	multisintomas(Atom, Atom2, Atom3, R).
+
+replace0([I|Index], Input, N, Resp, R):-
+    nth0(I, Input, Atom),
+    select(N, Resp, Atom, R1),
+    N1 is N + 1,
+    replace0(Index, Input, N1, R1, R).
+
+replace0([], _, _, Resp, Resp).
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sección de Recetas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Definicion de ingredientes en recetas
+ingrediente(sal).
+ingrediente(azucar).
+ingrediente(harina).
+ingrediente(huevo).
+ingrediente(mantequilla).
+ingrediente(leche).
+ingrediente(chocolate).
+ingrediente(vainilla).
+ingrediente(fresas).
+ingrediente(canela).
+ingrediente(pollo).
+ingrediente(arroz).
+ingrediente(aceite).
+ingrediente(pasta).
+ingrediente(queso).
+ingrediente(cebolla).
+ingrediente(tomate).
+ingrediente(pimiento).
+ingrediente(pimienta).
+ingrediente(ajo).
+ingrediente(salmon).
+ingrediente(manzana).
+
+% Definicion de tipos de cocina
+tipo_cocina(italiana).
+tipo_cocina(mexicana).
+tipo_cocina(china).
+tipo_cocina(francesa).
+tipo_cocina(india).
+tipo_cocina(japonesa).
+tipo_cocina(vegana).
+tipo_cocina(gluten_free).
+tipo_cocina(postres).
+tipo_cocina(desayunos).
+tipo_cocina(aperitivos).
+tipo_cocina(ensaladas).
+tipo_cocina(platos_principales).
+tipo_cocina(batidos).
+tipo_cocina(sopas).
+
+% Definicion de platos
+plato(pizza).
+plato(tacos).
+plato(sushi).
+plato(crepas).
+plato(pollo_asado).
+plato(lasagna).
+plato(tortilla_espanola).
+plato(pad_thai).
+plato(tarta_manzana).
+plato(pastel_chocolate).
+plato(arroz_tres_delicias).
+plato(ensalada_ceasar).
+plato(omelette).
+plato(brownies).
+plato(muffins).
+plato(pancakes).
+plato(quesadillas).
+plato(gazpacho).
+plato(ratatouille).
+
+% Relación entre platos y tipos de cocina
+pertenece_a_tipo_de_cocina(pizza, italiana).
+pertenece_a_tipo_de_cocina(tacos, mexicana).
+pertenece_a_tipo_de_cocina(sushi, japonesa).
+pertenece_a_tipo_de_cocina(crepas, francesa).
+pertenece_a_tipo_de_cocina(pollo_asado, platos_principales).
+pertenece_a_tipo_de_cocina(lasagna, italiana).
+pertenece_a_tipo_de_cocina(tortilla_espanola, desayunos).
+pertenece_a_tipo_de_cocina(pad_thai, tailandesa). 
+pertenece_a_tipo_de_cocina(tarta_manzana, postres).
+pertenece_a_tipo_de_cocina(pastel_chocolate, postres).
+pertenece_a_tipo_de_cocina(arroz_tres_delicias, china).
+pertenece_a_tipo_de_cocina(ensalada_ceasar, ensaladas).
+pertenece_a_tipo_de_cocina(omelette, desayunos).
+pertenece_a_tipo_de_cocina(brownies, postres).
+pertenece_a_tipo_de_cocina(muffins, desayunos).
+pertenece_a_tipo_de_cocina(pancakes, desayunos).
+pertenece_a_tipo_de_cocina(quesadillas, mexicana).
+pertenece_a_tipo_de_cocina(gazpacho, sopas).
+pertenece_a_tipo_de_cocina(ratatouille, platos_principales).
+
+% Definicion de recetas
+receta(pizza, [harina, levadura, tomate, queso, pepperoni, oregano]).
+receta(tacos, [tortilla_maiz, carne_asada, cebolla, cilantro, salsa]).
+receta(sushi, [arroz, alga_nori, pescado, aguacate, pepino]).
+receta(crepas, [harina, huevo, leche, mantequilla, fresas, chocolate]).
+receta(pollo_asado, [pollo, limon, ajo, aceite_oliva, pimienta]).
+receta(lasagna, [pasta_lasagna, carne_molida, tomate, queso_rallado]).
+receta(tortilla_espanola, [patatas, huevo, cebolla, aceite]).
+receta(pad_thai, [fideos_arroz, pollo, gambas, cacahuetes, brotes]).
+receta(tarta_manzana, [manzanas, azucar, harina, mantequilla, canela]).
+receta(pastel_chocolate, [harina, azucar, chocolate, mantequilla, huevo]).
+receta(arroz_tres_delicias, [arroz, huevo, jamon, gambas, guisantes]).
+receta(ensalada_ceasar, [lechuga, pollo, queso_parmesano, pan_tostado]).
+receta(omelette, [huevo, cebolla, tomate, queso, espinacas]).
+receta(brownies, [chocolate, azucar, harina, mantequilla, nueces]).
+receta(muffins, [harina, azucar, huevo, leche, aceite, frutas]).
+receta(pancakes, [harina, huevo, leche, azucar, vainilla]).
+receta(quesadillas, [tortillas, queso, pollo, aguacate, crema]).
+receta(gazpacho, [tomate, pepino, pimiento, ajo, aceite_oliva]).
+receta(ratatouille, [berenjena, calabacin, tomate, cebolla, ajo]).
+
+
+
+
+%Ingredientes de receta y cómo hacer cada receta
+template([cuales, son, los, ingredientes, de, receta, R, '?'], [0, 'incluye', Ingredientes, '.'], [6]):- receta(R, Ingredientes).
+
+template([quien, creo, plato, X, '?'], ['No tengo esa informacion sobre el creador de', 0, '.'], [3]).
+
+template([como, hacer, X, '?'], ['Para hacer', 0, 'necesitas los siguientes ingredientes:', Ingredientes, '.'], [2]):- receta(X, Ingredientes).
+
+
+% Pregunta por recetas que contienen tres ingredientes específicos
+template([que, receta, puedo, hacer, con, A,',' ,B, y, C, '?'], ['Una buena receta que puedes hacer con', 0, 1, 'y', 2, 'es', Recetas, '.'], [5, 6, 8]) :- pregunta_recetas_con_tres_ingredientes(A, B, C, Recetas).
+
+
+pregunta_recetas_con_tres_ingredientes(Ingrediente1, Ingrediente2, Ingrediente3, Recetas) :-
+    receta(Receta, Ingredientes),
+    member(Ingrediente1, Ingredientes),
+    member(Ingrediente2, Ingredientes),
+    member(Ingrediente3, Ingredientes),
+    Ingredientes = [Ingrediente1, Ingrediente2, Ingrediente3 | _],
+    Recetas = [Receta].
+
+
+%Preguntar a qué categoría pertenece un plato
+ template([a, que, categoria, pertenece, la, receta, R, '?'], [la, receta, 0, pertenece, a, la, categoria, CAT], [6]) :- pertenece_a_tipo_de_cocina(R, CAT).
+
+ %preguntas generales
+ template([], [], []).
+
+
+%load("C:/Users/modim/Desktop/eliza2.pl").
+
+
+
+template(_, ['Lo siento, no tengo informacion sobre eso.'], []).
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reglas y procedimientos generales
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+match([],[]).
+match([], _) :- true.
+
+match([S|Stim], [I|Input]) :-
+    atom(S),
+    S == I,
+    match(Stim, Input),
+    !.
+
+match([S|Stim], [_|Input]) :-
+    \+atom(S),
+    match(Stim, Input),
+    !.
+
+replace0([], _, _, Resp, R) :-
+    append(Resp, [], R),
+    !.
+
+replace0([I|_], Input, _, Resp, R) :-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagLike,
+    elizaGusta(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagDo,
+    elizaHace(Atom, R).
+
+replace0([I|_], Input, _, Resp, R) :-
+    nth0(I, Input, Atom),
+    nth0(0, Resp, X),
+    X == flagIs,
+    elizaEs(Atom, R).
+
+replace0([I|Index], Input, N, Resp, R) :-
+    length(Index, M), M =:= 0,
+    nth0(I, Input, Atom),
+    select(N, Resp, Atom, R1),
+    append(R1, [], R),
+    !.
+
+replace0([I|Index], Input, N, Resp, R) :-
+    nth0(I, Input, Atom),
+    length(Index, M), M > 0,
+    select(N, Resp, Atom, R1),
+    N1 is N + 1,
+    replace0(Index, Input, N1, R1, R),
+    !.
+
+elizaGusta(X, R) :-
+    leGusta(X),
+    R = ['Si, me gusta', X].
+
+elizaGusta(X, R) :-
+    \+leGusta(X),
+    R = ['No, no me gusta', X].
+
+leGusta(manzanas).
+leGusta(computadoras).
+leGusta(carros).
+
+elizaHace(X, R) :-
+    hace(X),
+    R = ['Si, yo', X, 'y me encanta'].
+
+elizaHace(X, R) :-
+    \+hace(X),
+    R = ['No, yo no', X, '. Es demasiado dificil para mi.'].
+
+hace(estudiar).
+hace(cocinar).
+hace(trabajar).
+
+elizaEs(X, R) :-
+    es0(X),
+    R = ['Si, yo soy', X].
+
+elizaEs(X, R) :-
+    \+es0(X),
+    R = ['No, yo no soy', X].
+
+es0(tonta).
+es0(rara).
+es0(amable).
+es0(feliz).
+
+
+```
+
+
+# Preguntas realizables y consultas a sistema
+
+## Recetas de cocina
+
+1. cuales son los ingredientes de receta *tacos*?
+2. quien creo plato *tacos*?
+3. como hacer *tacos*?
+4. que receta puedo hacer con *huevo*, *cebolla* y *tomate*?
+5. a que categoria pertenece la receta *tacos*?
+
+
+## Síndrome de Moebius
+
+1. si tengo **tos** podria ser sindrome de moebius?
+2. si tengo **tos**, **paralisis_facial** y **estrabismo** podria ser sindrome de moebius?
+3. que es el sindrome de moebius?
+4. cuales son los sintomas del sindrome de moebius?
+5. cuales son las causas del sindrome de moebius?
+6. como se trata el sindrome de moebius?
+7. cual es el pronostico del sindrome de moebius?
+8. si tengo sindrome de moebius y aplico **ortodoncia** podre mejorar?
